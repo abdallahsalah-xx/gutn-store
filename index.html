@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>قطن – متجر ملابس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF0F4;--surface:#fff;--ink:#1E2B55;--mute:#5b6485;--accent:#E0A526;--on-accent:#1E2B55;--line:#d6dae6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121830;--surface:#1b2447;--ink:#eef0f8;--mute:#a4abc9;--accent:#E0A526;--on-accent:#121830;--line:#2c376a}}
+:root[data-theme="dark"]{--bg:#121830;--surface:#1b2447;--ink:#eef0f8;--mute:#a4abc9;--accent:#E0A526;--on-accent:#121830;--line:#2c376a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,system-ui,sans-serif;line-height:1.7}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{font-family:"Reem Kufi",Cairo,serif;font-size:2rem;letter-spacing:0}
+button{font:inherit;cursor:pointer;border:0;border-radius:8px}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.cartbtn{background:var(--ink);color:var(--bg);padding:8px 16px;font-weight:600}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:36px 0 56px}
+.hero h1{font-family:"Reem Kufi",Cairo,serif;font-size:clamp(2.6rem,7vw,5rem);line-height:1.15;margin:0 0 16px}
+.hero p{color:var(--mute);max-width:44ch;font-size:1.1rem;margin:0 0 24px}
+.cta{background:var(--accent);color:var(--on-accent);padding:12px 28px;font-weight:800;font-size:1.05rem;text-decoration:none;border-radius:8px;display:inline-block}
+.band{aspect-ratio:1;border-radius:50% 50% 12px 12px;background:var(--ink);display:grid;place-items:center;color:var(--accent)}
+.band svg{width:62%}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filters button{background:transparent;color:var(--ink);border:1.5px solid var(--line);padding:6px 18px;font-weight:600}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;padding-bottom:64px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pic{aspect-ratio:4/5;display:grid;place-items:center}
+.pic svg{width:58%}
+.info{padding:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.info h3{margin:0;font-size:1.05rem}
+.info .cat{color:var(--mute);font-size:.9rem}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px}
+.price{font-weight:800}
+.add{background:var(--accent);color:var(--on-accent);padding:6px 14px;font-weight:600}
+aside{position:fixed;inset:0 auto 0 0;width:min(360px,100%);background:var(--surface);border-right:1px solid var(--line);transform:translateX(-102%);transition:transform .25s;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;z-index:20}
+aside.open{transform:none}
+aside h2{margin:0 0 12px;font-family:"Reem Kufi",Cairo,serif}
+#items{flex:1;overflow:auto}
+.line{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.line button{background:var(--bg);color:var(--ink);padding:0 10px}
+.total{font-weight:800;font-size:1.15rem;padding:14px 0}
+.empty{color:var(--mute)}
+#cart input{width:100%;margin-bottom:6px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}.note{color:var(--mute);font-size:.95rem;margin:0 0 8px}.pic{overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover;display:block}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--mute);text-align:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}.band{max-width:260px;margin:auto;order:-1}}
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">قطن</div><button class="cartbtn" id="open" aria-label="فتح السلة">السلة (<span id="count">0</span>)</button></header>
+<section class="hero">
+<div><h1>ملابس قطن مصري، تلبسها كل يوم</h1><p>تيشيرتات وقمصان وجينز بخامات مريحة وأسعار واضحة. اختر مقاسك وأضف للسلة.</p><a class="cta" href="#shop">تسوّق الآن</a></div>
+<div class="band"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M30 12 14 24 4 46l16 8 6-8v42h48V46l6 8 16-8-10-22-16-12c-3 8-11 12-20 12s-17-4-20-12z"/></svg></div>
+</section>
+<section id="shop">
+<div class="filters" id="filters" role="group" aria-label="التصنيفات"></div>
+<div class="grid" id="grid"></div>
+</section>
+</div>
+<footer>قطن – الشحن لجميع المحافظات، والدفع عند الاستلام</footer>
+<aside id="cart" aria-label="السلة"><h2>سلة المشتريات</h2><div id="items"></div><div class="total">الإجمالي: <span id="total">0</span> جنيه</div><input id="cn" placeholder="الاسم" autocomplete="name"><input id="cp" placeholder="رقم الموبايل" inputmode="tel" autocomplete="tel"><input id="ca" placeholder="العنوان بالتفصيل" autocomplete="street-address"><p class="note" id="msg"></p><button class="cta" id="checkout">إرسال الطلب على واتساب</button><button id="close" style="margin-top:8px;background:var(--bg);color:var(--ink);padding:8px">إغلاق</button></aside>
+<script src="products.js"></script>
+<script>
+// ===== إعدادات: عدّل السطر ده برقم الواتساب بتاعك =====
+// الرقم بصيغة دولية من غير + ولا أصفار في الأول. مثال لرقم مصري 01012345678:  "201012345678"
+const WA="201029796150";
+// ===== المنتجات: عدّل الاسم والسعر واللون. لو عندك صورة، زوّد img:"images/اسم-الصورة.jpg" =====
+const DEFAULT_P=[
+{n:"تيشيرت قطن أساسي",c:"تيشيرتات",p:250,k:"#7aa2d6",s:"tee"},
+{n:"تيشيرت مقلّم",c:"تيشيرتات",p:290,k:"#e9c46a",s:"tee"},
+{n:"قميص كتان",c:"قمصان",p:480,k:"#9fc5a8",s:"tee"},
+{n:"قميص أكسفورد",c:"قمصان",p:520,k:"#c9d3ee",s:"tee"},
+{n:"بنطلون جينز",c:"بناطيل",p:650,k:"#3d5a9c",s:"pant"},
+{n:"بنطلون تشينو",c:"بناطيل",p:580,k:"#b89f7a",s:"pant"},
+{n:"هودي قطن",c:"جاكيتات",p:720,k:"#6b7a99",s:"tee"},
+{n:"جاكيت خفيف",c:"جاكيتات",p:890,k:"#2a3a6b",s:"tee"}];
+const P=(Array.isArray(window.PRODUCTS)&&window.PRODUCTS.length?window.PRODUCTS:DEFAULT_P).filter(x=>x.on!==false);
+const SH={tee:'<path d="M30 12 14 24 4 46l16 8 6-8v42h48V46l6 8 16-8-10-22-16-12c-3 8-11 12-20 12s-17-4-20-12z"/>',pant:'<path d="M26 6h48l6 90H56L50 38l-6 58H20z"/>'};
+const cats=["الكل",...new Set(P.map(x=>x.c))];let cur="الكل",cart={};
+const $=id=>document.getElementById(id);
+function fmt(n){return n.toLocaleString("ar-EG")}
+function draw(){
+ $("filters").innerHTML=cats.map(c=>`<button aria-pressed="${c===cur}" data-c="${c}">${c}</button>`).join("");
+ $("grid").innerHTML=P.map((x,i)=>({x,i})).filter(o=>cur==="الكل"||o.x.c===cur).map(({x,i})=>`<article class="card"><div class="pic" style="background:${x.k}22;color:${x.k}">${x.img?`<img src="${x.img}" alt="${x.n}" loading="lazy">`:`<svg viewBox="0 0 100 100" fill="currentColor">${SH[x.s]}</svg>`}</div><div class="info"><h3>${x.n}</h3><span class="cat">${x.c}</span><div class="row"><span class="price">${fmt(x.p)} جنيه</span><button class="add" data-i="${i}">أضف للسلة</button></div></div></article>`).join("");
+}
+function cartDraw(){
+ const ids=Object.keys(cart);let t=0,n=0;
+ $("items").innerHTML=ids.length?ids.map(i=>{const q=cart[i],x=P[i];t+=x.p*q;n+=q;return `<div class="line"><span>${x.n} × ${fmt(q)}</span><span>${fmt(x.p*q)} <button data-r="${i}" aria-label="حذف">−</button></span></div>`}).join(""):'<p class="empty">السلة فاضية. اختر منتجًا وأضفه.</p>';
+ $("count").textContent=fmt(n);$("total").textContent=fmt(t);
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.c){cur=b.dataset.c;draw()}
+ else if(b.dataset.i){cart[b.dataset.i]=(cart[b.dataset.i]||0)+1;cartDraw();$("cart").classList.add("open")}
+ else if(b.dataset.r){if(--cart[b.dataset.r]<=0)delete cart[b.dataset.r];cartDraw()}
+ else if(b.id==="open")$("cart").classList.add("open");
+ else if(b.id==="close")$("cart").classList.remove("open");
+ else if(b.id==="checkout"){
+  const ids=Object.keys(cart),m=$("msg"),nm=$("cn").value.trim(),ph=$("cp").value.trim(),ad=$("ca").value.trim();
+  if(!ids.length){m.textContent="السلة فاضية.";return}
+  if(!nm||!ph||!ad){m.textContent="اكتب الاسم ورقم الموبايل والعنوان.";return}
+  if(/X/.test(WA)){m.textContent="رقم الواتساب لسه ما اتحطش في الملف.";return}
+  let t=0;const lines=ids.map(i=>{const x=P[i],q=cart[i];t+=x.p*q;return "- "+x.n+" × "+q+" = "+fmt(x.p*q)+" جنيه"});
+  const msg="طلب جديد من متجر قطن\n\n"+lines.join("\n")+"\n\nالإجمالي: "+fmt(t)+" جنيه (الدفع عند الاستلام)\n\nالاسم: "+nm+"\nالموبايل: "+ph+"\nالعنوان: "+ad;
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
+  m.textContent="اتفتح واتساب. اضغط إرسال عشان الطلب يوصل.";
+ }
+});
+draw();cartDraw();
+</script>
+</body>
+</html>
